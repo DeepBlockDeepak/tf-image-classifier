@@ -1,0 +1,26 @@
+# Ignore Python compiled files
+__pycache__
+*.cpython
+
+# Ignore downloaded models
+/models/
+
+# Ignore testing images
+/images/
+
+# Ignore output of tests
+/output/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Python egg-info directories
+*.egg-info/
+
+# weights and biases
+wandb/
+artifacts/
+
+# Ignore any other files/directories you want to keep local
+# Add them below this comment
+
