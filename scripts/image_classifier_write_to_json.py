@@ -9,9 +9,10 @@ from argparse_config import create_parser
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+
 from src.image_classification.model import (
-    ImageClassifier,
-)  # import the relevant package
+    ImageClassifier,  # import the relevant package
+)
 
 
 def generate_results_dict(model_str, image_path, predicted_classes, confidences):

@@ -8,9 +8,9 @@ from argparse_config import create_parser
 # add the parent directory of the current script to the Python path.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src.image_classification.model import (
+from src.image_classification.model import (  # import the relevant package
     ImageClassifier,
-)  # import the relevant package
+)
 
 if __name__ == "__main__":
     parser = create_parser()
