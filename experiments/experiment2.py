@@ -14,9 +14,7 @@ def load_your_test_data():
         ("macaque.jpeg", "macaque"),
     ]
 
-    process_image_path = lambda x: ("images/" + x[0], x[1])
-
-    data = list(map(process_image_path, data))
+    data = [("images/" + item[0], item[1]) for item in data]
 
     return data
 
