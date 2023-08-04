@@ -3,4 +3,4 @@
 
 ## Testing
 
-To run the entire test suite, use the command `python -m unittest discover tests`. If you want to run a single test, you can do so by specifying the test file, like so: `python -m unittest tests/test_file.py`.
+To run the entire test suite, use the command `python -m unittest discover tests`. If you want to run a single test, you can do so by specifying the test file, like so: `python -m unittest tests/test_image_classification.py`.
