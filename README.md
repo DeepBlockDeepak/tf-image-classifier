@@ -13,7 +13,7 @@ Before you can run the TF Image Classifier, there are a few local resources you 
 
 1. **Models Directory**: 
     - This project utilizes models from TensorFlow Hub's EfficientNet. 
-    - As an example, the model at [this link](https://tfhub.dev/tensorflow/efficientnet/b4/classification/1) was used and saved in this project as `/models/model_b4`.
+    - As an example, [this EfficientNet-B4 model](https://tfhub.dev/tensorflow/efficientnet/b4/classification/1) was used and saved in this project as `/models/model_b4`.
     - My current structure of the `model_b4` directory:
         ```
         models/model_b4/
@@ -29,7 +29,7 @@ Before you can run the TF Image Classifier, there are a few local resources you 
     - Note: Please ensure that you have the right images in this directory before running the classifier.
 
 3. **Wandb (Weights & Biases) Directory**:
-    - This project uses Weights & Biases for experiment tracking. When you run an experiment script that initializes wandb (like the provided `baseline.py`), a `wandb` directory will be auto-generated in the directory from which you ran the script.
+    - This project uses Weights & Biases for experiment tracking. When you run an experiment script that initializes wandb (like the provided [`baseline.py`](/experiments/baseline.py)), a `wandb` directory will be auto-generated in the directory from which you ran the script.
     - This directory caches data, checkpoints, and configuration related to your Weights & Biases runs. It's essential for ensuring smooth communication between your local machine and the Weights & Biases cloud.
     - You do not need to manually create this directory; it will be created for you upon the initialization of wandb in any script.
 
@@ -38,16 +38,22 @@ Before you can run the TF Image Classifier, there are a few local resources you 
 
 ### Example Run:
 From the project root, run the classifier:
-`python scripts/image_classifier_write_to_json.py models/model_b7 images/stella_boston_terrier.jpg`
+```python
+python scripts/image_classifier_write_to_json.py models/model_b7 images/stella_boston_terrier.jpg
+```
 
 
 ### Testing
 
 To run the entire test suite, use the command:
-`python -m unittest discover tests`
+```python
+python -m unittest discover tests
+```
 
 For a single test:
-`python -m unittest tests/test_image_classification.py`
+```python
+python -m unittest tests/test_image_classification.py
+```
 
 
 ## Want to Contribute?
