@@ -20,7 +20,7 @@ Pull Requests are the best way to propose changes to the codebase. We actively w
 Here are the steps to setup the development environment:
 
 1. Clone the repository: `git clone <repository-url>`
-2. Navigate to the project directory: `cd tf-classifier`
+2. Navigate to the project directory: `cd tf-image-classifier`
 3. Install the package in editable mode with dev extras: `pip install -e ".[dev]"`
 4. Install pre-commit hooks: `pre-commit install`
 5. To update the hooks to the latest versions, run: `pre-commit autoupdate`
