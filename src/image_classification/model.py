@@ -1,7 +1,7 @@
 import ast
-import json
+import base64
 import os
-from typing import Dict
+from typing import Dict, Union
 
 import tensorflow as tf
 
@@ -11,33 +11,24 @@ class ImageClassifier:
         self.model = self.load_model(model_path)
         self.class_map = self.read_in_class_map(class_map_path)
 
-    # load and return the model from the given path
+    # load and return the model
     @staticmethod
     def load_model(model_path):
-        if os.path.exists(model_path):
+        if tf.io.gfile.exists(model_path):
             # load the model using tf's load_model function
             return tf.keras.models.load_model(model_path)
         else:
             raise FileNotFoundError(f"Model path {model_path} does not exist.")
 
-    # load and preprocess and return the image
     @staticmethod
-    def load_image(image_path, img_size=(224, 224)):
-        if os.path.exists(image_path):
-            # read the image file
-            img = tf.io.read_file(image_path)
-            # decode the image file to a tensor
-            img = tf.image.decode_jpeg(img, channels=3)
-            # resize the image to the size expected by the model
-            img = tf.image.resize(img, img_size)
-            # normalize pixel values to the range [0, 1]
-            img = img / 255.0
-            # add a batch dimension
-            img = tf.expand_dims(img, axis=0)
-
-            return img
-        else:
-            raise FileNotFoundError(f"Image path {image_path} does not exist.")
+    def load_image_from_memory(image_data, img_size=(224, 224)):
+        # decode the image file to a tensor
+        img = tf.io.decode_image(image_data, channels=3, expand_animations=False)
+        # resize, normalize, and add a batch dimension as before
+        img = tf.image.resize(img, img_size)
+        img = img / 255.0
+        img = tf.expand_dims(img, axis=0)
+        return img
 
     # predicts the class of the image
     def predict_image_class(self, img):
@@ -67,18 +58,16 @@ class ImageClassifier:
     def read_in_class_map(class_map_path) -> Dict[str, int]:
         with open(class_map_path, "r") as f:
             data = f.read()
-            # use ast module due to bad formatting in source file
+            # use ast module due to formatting of source file
             class_map = ast.literal_eval(data)
 
         return class_map
 
-    # performs the final classification work
-    def classify(self, image_path):
-        img = self.load_image(image_path)
+    def classify(self, image_data: Union[str, bytes]):
+        img = self.load_image_from_memory(image_data)
         predicted_class, confidence = self.predict_image_class(img)
         # get the associated animal "value" from the "key"-predicted_class
         predicted_class = self.class_map[predicted_class]
-
         return predicted_class, confidence
 
     # performs a prediction of the top-5 classes
